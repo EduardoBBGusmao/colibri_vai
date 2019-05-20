@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define file_vai "vai3.csv"
+#define file_vai "vai2.csv"
+#define csv_delimiter ","
 int contando = 0;
 struct car {
 	char dongle[20];
@@ -36,7 +37,7 @@ struct car* read_line(struct car* car_p){
 
 	struct car* car_info = car_p;
 	FILE *new_file;
-	new_file = fopen("vai2.csv", "r");
+	new_file = fopen(file_vai, "r");
 	char line[128];
 	
 	fgets ( line, sizeof line, new_file );
@@ -44,7 +45,7 @@ struct car* read_line(struct car* car_p){
 	
 	while (fgets (line, sizeof line, new_file) != NULL){
 		static int count = 0;
-		char *ptr = strtok(line, ",");
+		char *ptr = strtok(line, csv_delimiter);
 		char *headers[9];
 		int i=0;
 		
@@ -53,12 +54,13 @@ struct car* read_line(struct car* car_p){
 		while(ptr != NULL){	
 			headers[i] = ptr;
 			i++;
-			ptr = strtok(NULL, ",");
+			ptr = strtok(NULL, csv_delimiter);
 		}
 		
 		car_info = insert_bottom(headers, car_p);
 		free(temp);
 	}
+	fclose(new_file);
 	return car_info;
 	
 }
@@ -99,7 +101,7 @@ char* find_hearders(){
 	char line[128];
 	
 	fgets ( line, sizeof line, new_file );
-	char *ptr = strtok(line, ",");
+	char *ptr = strtok(line, csv_delimiter);
 	char *headers[9];
 	int i=0;
 	while(ptr != NULL){	
@@ -130,29 +132,6 @@ void print_list(struct car* car_info){
 	}
 }
 
-
-		/*
-		temp -> dongle = headers[0];
-		temp -> customer = headers[1];
-		temp -> started_at = headers[2];
-		temp -> finished_at = headers[3];
-		temp -> minute = atof(headers[4]);
-		temp -> consumption = atof(headers[5]);
-		temp -> mileage = atof(headers[6]);
-		temp -> cost = atof(headers[7]);
-		temp -> kml = atof(headers[8]);
-		temp -> next_car = NULL;
-		
-		if (count == 0){
-			car_p = temp;
-			
-			count++;
-		}
-		else
-			car_p -> next_car = temp;
-		
-		car_p = car_p -> next_car;*/
-		
 
 
 
