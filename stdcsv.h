@@ -1,5 +1,7 @@
-#define file_vai "vai2.csv"
-#define csv_delimiter ","
+#include "const.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 struct car {
 	char dongle[20];

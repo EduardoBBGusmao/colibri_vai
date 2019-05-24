@@ -7,14 +7,15 @@ void print_list(struct car* car_info);
 
 int main(){
 
-	char* head_line = find_hearders();
 	struct car* car_info = (struct car*)malloc(sizeof(struct car));
 	
 	car_info = read_line(car_info);
 	print_list(car_info);
+	free(car_info);
 }
 
 
+// memory leak errors valgrind test
 void print_list(struct car* car_info){
 	struct car* temp = car_info;
 		printf("aa\n");
@@ -29,9 +30,12 @@ void print_list(struct car* car_info){
 		printf("cost: R$ %.2f || ", temp->cost);
 		printf("kml: %.2f || ", temp->kml);
 		printf("\n");
+		if(temp -> next_car != NULL);
 		temp = temp -> next_car;
 	}
+	free(temp);
 }
+
 
 
 

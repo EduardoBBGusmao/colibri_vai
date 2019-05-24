@@ -1,4 +1,4 @@
-
+#include "stdcsv.h"
 struct car* read_line(struct car* car_p){
 
 	struct car* car_info = car_p;
@@ -31,6 +31,7 @@ struct car* read_line(struct car* car_p){
 		car_info = insert_bottom(headers, car_p);
 		free(temp);
 	}
+	
 	fclose(new_file);
 	return car_info;
 	
@@ -63,29 +64,6 @@ struct car* insert_bottom(char* headers[9],struct car* head) {
 		head = new_node;
 	
 	return head;
-}
-
-char* find_hearders(){
-
-	FILE *new_file;
-	new_file = fopen("vai.csv", "r");
-	if(!new_file){
-	        printf("Error to open file ");
-	        exit(1);
-	}
-	char line[128];
 	
-	fgets ( line, sizeof line, new_file );
-	char *ptr = strtok(line, csv_delimiter);
-	char *headers[9];
-	int i=0;
-	while(ptr != NULL){	
-		headers[i] = ptr;
-		printf("'%s'\n", headers[i]);
-		i++;
-		ptr = strtok(NULL, ",");
-	}
-	
-	return headers[9];
 }
 
