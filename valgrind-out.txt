@@ -1,0 +1,312 @@
+==43281== Memcheck, a memory error detector
+==43281== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==43281== Using Valgrind-3.14.0 and LibVEX; rerun with -h for copyright info
+==43281== Command: ./a.out
+==43281== Parent PID: 18609
+==43281== 
+==43281== Invalid read of size 16
+==43281==    at 0x100651A05: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==43281==    by 0x1002E3728: fgets (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100000ACE: read_line (in ./a.out)
+==43281==    by 0x1000008A0: main (in ./a.out)
+==43281==  Address 0x100ded920 is 16 bytes before a block of size 65,536 alloc'd
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002E6500: __smakebuf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E9C75: __srefill0 (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E9D65: __srefill (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E36F9: fgets (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100000ACE: read_line (in ./a.out)
+==43281==    by 0x1000008A0: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x100000CD0: insert_bottom (in ./a.out)
+==43281==    by 0x100000B90: read_line (in ./a.out)
+==43281==    by 0x1000008A0: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x1000AD76F: strlen (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002ECA85: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100000918: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x1002C4174: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x1002C41B9: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x1002C41E3: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x1002C41E5: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x100651A28: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==43281==    by 0x1002E59E9: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EF5FE: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x100651A7D: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==43281==    by 0x1002E59E9: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EF5FE: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100000931: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== Conditional jump or move depends on uninitialised value(s)
+==43281==    at 0x100651A9B: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==43281==    by 0x1002E59E9: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EF5FE: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100000963: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 
+==43281== HEAP SUMMARY:
+==43281==     in use at exit: 45,380 bytes in 371 blocks
+==43281==   total heap usage: 596 allocs, 225 frees, 142,100 bytes allocated
+==43281== 
+==43281== 24 bytes in 1 blocks are still reachable in loss record 3 of 51
+==43281==    at 0x1000AC2FE: malloc_zone_malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100758901: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007588D3: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757394: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757096: sel_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x10075698C: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281==    by 0x100007E39: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==43281==    by 0x10022171D: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==43281==    by 0x100756073: _objc_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1001ABB84: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==43281== 
+==43281== 32 bytes in 1 blocks are still reachable in loss record 7 of 51
+==43281==    at 0x1000AC2FE: malloc_zone_malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100758A9E: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758A6E: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758948: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007588D3: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757394: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757096: sel_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x10075698C: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281==    by 0x100007E39: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==43281==    by 0x10022171D: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==43281== 
+==43281== 32 bytes in 1 blocks are still reachable in loss record 8 of 51
+==43281==    at 0x1000AC2FE: malloc_zone_malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100758ABF: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758A6E: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758948: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007588D3: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757394: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757096: sel_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x10075698C: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281==    by 0x100007E39: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==43281==    by 0x10022171D: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==43281== 
+==43281== 32 bytes in 1 blocks are still reachable in loss record 9 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100758B83: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758A6E: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758948: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007588D3: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757394: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757096: sel_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x10075698C: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281==    by 0x100007E39: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==43281==    by 0x10022171D: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==43281== 
+==43281== 32 bytes in 1 blocks are still reachable in loss record 10 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1007589AE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007588D3: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757394: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757096: sel_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x10075698C: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281==    by 0x100007E39: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==43281==    by 0x10022171D: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==43281==    by 0x100756073: _objc_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1001ABB84: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==43281== 
+==43281== 32 bytes in 1 blocks are still reachable in loss record 13 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C704A: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C3F91: __rv_alloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C3FB2: __nrv_alloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C424D: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 36 bytes in 1 blocks are still reachable in loss record 14 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C704A: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C7901: __d2b_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C4276: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 36 bytes in 1 blocks are still reachable in loss record 15 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C704A: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C74A9: __pow5mult_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C49B9: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1000009E5: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 36 bytes in 1 blocks are still reachable in loss record 16 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C704A: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C7327: __mult_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C752C: __pow5mult_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C49B9: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1000009E5: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 36 bytes in 1 blocks are still reachable in loss record 17 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C704A: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C758F: __lshift_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C4AE7: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1000009E5: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 48 bytes in 1 blocks are still reachable in loss record 19 of 51
+==43281==    at 0x1000AC8AD: malloc_zone_calloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100758F24: _NXHashRehashToCapacity (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758EA2: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758BAD: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758A6E: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100758948: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007588D3: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757394: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100757096: sel_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x10075698C: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281== 
+==43281== 72 bytes in 3 blocks are possibly lost in loss record 30 of 51
+==43281==    at 0x1000AC6EA: calloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1007567C2: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1007694E0: map_images (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x100007C64: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==43281==    by 0x100007E39: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==43281==    by 0x10022171D: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==43281==    by 0x100756073: _objc_init (in /usr/lib/libobjc.A.dylib)
+==43281==    by 0x1001ABB84: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==43281==    by 0x1001ABB6B: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==43281==    by 0x1000BA9C2: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==43281==    by 0x100019A79: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==43281==    by 0x100019CA9: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==43281== 
+==43281== 80 bytes in 1 blocks are still reachable in loss record 31 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C6FC9: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C3F91: __rv_alloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C3FB2: __nrv_alloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C424D: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x10000097D: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 88 bytes in 2 blocks are still reachable in loss record 32 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x1002C704A: __Balloc_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C758F: __lshift_D2A (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002C4AFD: __dtoa (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EC536: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x100314058: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002EB741: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1002E97CA: printf (in /usr/lib/system/libsystem_c.dylib)
+==43281==    by 0x1000009E5: print_list (in ./a.out)
+==43281==    by 0x1000008AD: main (in ./a.out)
+==43281== 
+==43281== 22,288 bytes in 199 blocks are indirectly lost in loss record 50 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100000CF7: insert_bottom (in ./a.out)
+==43281==    by 0x100000B90: read_line (in ./a.out)
+==43281==    by 0x1000008A0: main (in ./a.out)
+==43281== 
+==43281== 22,400 (112 direct, 22,288 indirect) bytes in 1 blocks are definitely lost in loss record 51 of 51
+==43281==    at 0x1000AC086: malloc (in /usr/local/Cellar/valgrind/3.14.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==43281==    by 0x100000CF7: insert_bottom (in ./a.out)
+==43281==    by 0x100000B90: read_line (in ./a.out)
+==43281==    by 0x1000008A0: main (in ./a.out)
+==43281== 
+==43281== LEAK SUMMARY:
+==43281==    definitely lost: 112 bytes in 1 blocks
+==43281==    indirectly lost: 22,288 bytes in 199 blocks
+==43281==      possibly lost: 72 bytes in 3 blocks
+==43281==    still reachable: 544 bytes in 14 blocks
+==43281==         suppressed: 22,364 bytes in 154 blocks
+==43281== 
+==43281== For counts of detected and suppressed errors, rerun with: -v
+==43281== Use --track-origins=yes to see where uninitialised values come from
+==43281== ERROR SUMMARY: 2301 errors from 12 contexts (suppressed: 11 from 11)
