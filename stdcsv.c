@@ -30,6 +30,7 @@ struct car* read_line(struct car* car_p){
 		
 		car_info = insert_bottom(headers, car_p);
 		free(temp);
+		free(ptr);		
 	}
 	
 	fclose(new_file);
@@ -37,16 +38,21 @@ struct car* read_line(struct car* car_p){
 	
 }
 
-struct car* insert_bottom(char* headers[9],struct car* head) {
+struct car* insert_bottom(char* headers[9],struct car* head) 
+{
 	struct car* current_node = head;
-	struct car* new_node;
- 	float min = atof(headers[4]), cons = atof(headers[5])/1000,mil=atof(headers[6])/1000, val = atof(headers[7]), km= atof(headers[8])/1000;
+	struct car* new_node = (struct car*) malloc(sizeof(struct car));
+	
+ 	float min = atof(headers[4]);
+ 	float cons = atof(headers[5])/1000;
+ 	float mil=atof(headers[6])/1000;
+ 	float val = atof(headers[7]);
+ 	float km= atof(headers[8])/1000;
  	
-	while ( current_node != NULL && current_node->next_car != NULL) {
+	while (current_node->next_car != NULL) {
 		current_node = current_node->next_car;
 	}
 	
-	new_node = (struct car*) malloc(sizeof(struct car));
 	strcpy(new_node -> dongle, headers[0]);
 	strcpy(new_node -> customer, headers[1]);
 	strcpy(new_node -> started_at, headers[2]);
@@ -58,12 +64,37 @@ struct car* insert_bottom(char* headers[9],struct car* head) {
 	new_node -> kml = km;
 	new_node->next_car= NULL;
 	
-	if (current_node != NULL)
+	if (current_node != NULL){
 		current_node->next_car = new_node;
-	else
+		
+	} else {
 		head = new_node;
+	}
 	
+	free(new_node);
+	//free(current_node);
 	return head;
 	
 }
+void print_list(struct car* car_info)
+{
+	struct car* temp = car_info;
+	
+	while (temp -> next_car != NULL){
+		printf("dongle_id: %s || ", temp->dongle);
+		printf("customer: %s || ", temp->customer);
+		printf("started_at: %s || ", temp->started_at);
+		printf("finished_at: %s || ", temp->finished_at);
+		printf("minute: %.2f || ", temp->minute);
+		printf("consumption: %.3f || ", temp->consumption);
+		printf("mileage: %.3f km || ", temp->mileage);
+		printf("cost: R$ %.2f || ", temp->cost);
+		printf("kml: %.2f || ", temp->kml);
+		printf("\n");
+		if(temp -> next_car != NULL);
+		temp = temp -> next_car;
+	};
+	free(temp);
+}
+
 

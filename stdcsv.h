@@ -19,4 +19,5 @@ struct car {
 struct car* read_line(struct car* car_p);
 struct car* insert_bottom(char* headers[9],struct car* head);
 char* find_hearders();
+void print_list(struct car* car_info);
 

@@ -1,2 +1,2 @@
-#define file_vai "vai2.csv"
+#define file_vai "vai.csv"
 #define csv_delimiter ","
