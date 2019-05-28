@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct trip {
+	float average_speed;
+	float average_rpm;
+};
+
 struct car {
 	char dongle[20];
 	char customer[20];
@@ -13,6 +18,7 @@ struct car {
 	float mileage;
 	float cost;
 	float kml;
+	struct trip trip_info;
 	struct car* next_car;
 };
 
@@ -20,4 +26,4 @@ struct car* read_line(struct car* car_p);
 struct car* insert_bottom(char* headers[9],struct car* head);
 char* find_hearders();
 void print_list(struct car* car_info);
-
+struct trip trip_average();

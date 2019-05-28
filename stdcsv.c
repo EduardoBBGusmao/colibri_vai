@@ -1,9 +1,10 @@
 #include "stdcsv.h"
+
 struct car* read_line(struct car* car_p){
 
 	struct car* car_info = car_p;
 	FILE *new_file;
-	new_file = fopen(file_vai, "r");
+	new_file = fopen(vai_file, "r");
 	if(!new_file){
 	        printf("Error to open file ");
 	        exit(1);
@@ -15,7 +16,6 @@ struct car* read_line(struct car* car_p){
 	
 	
 	while (fgets (line, sizeof line, new_file) != NULL){
-		static int count = 0;
 		char *ptr = strtok(line, csv_delimiter);
 		char *headers[9];
 		int i=0;
@@ -41,18 +41,18 @@ struct car* read_line(struct car* car_p){
 struct car* insert_bottom(char* headers[9],struct car* head) 
 {
 	struct car* current_node = head;
-	struct car* new_node = (struct car*) malloc(sizeof(struct car));
-	
+	struct car* new_node;
  	float min = atof(headers[4]);
  	float cons = atof(headers[5])/1000;
  	float mil=atof(headers[6])/1000;
  	float val = atof(headers[7]);
  	float km= atof(headers[8])/1000;
  	
-	while (current_node->next_car != NULL) {
+	while ( current_node != NULL && current_node->next_car != NULL) {
 		current_node = current_node->next_car;
 	}
 	
+	new_node = (struct car*) malloc(sizeof(struct car));
 	strcpy(new_node -> dongle, headers[0]);
 	strcpy(new_node -> customer, headers[1]);
 	strcpy(new_node -> started_at, headers[2]);
@@ -62,17 +62,15 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	new_node -> mileage = mil;
 	new_node -> cost = val;
 	new_node -> kml = km;
-	new_node->next_car= NULL;
+	new_node -> next_car= NULL;
+	//new_node -> trip_info = trip_average(); not working
 	
 	if (current_node != NULL){
 		current_node->next_car = new_node;
-		
 	} else {
 		head = new_node;
 	}
-	
-	free(new_node);
-	//free(current_node);
+	// free(new_node); not working
 	return head;
 	
 }
@@ -97,4 +95,48 @@ void print_list(struct car* car_info)
 	free(temp);
 }
 
-
+struct trip trip_average()
+{
+	int count = 0;
+	int i=0;
+	float current_speed;
+	float current_rpm;
+	float a_speed = 0;
+	float a_rpm = 0;
+	FILE *new_file;
+	new_file = fopen(trip_file, "r");
+	struct trip current_average;
+	
+	if(!new_file){
+	        printf("Error to open file ");
+	        exit(1);
+	}
+	
+	char line[128];
+	
+	fgets ( line, sizeof line, new_file );
+	
+	while (fgets (line, sizeof line, new_file) != NULL){
+		
+		char *ptr = strtok(line, csv_delimiter);
+		char *headers[3];
+		
+		while(ptr != NULL || i < 3){	
+			headers[i] = ptr;
+			i++;
+			ptr = strtok(NULL, csv_delimiter);
+		};
+		current_speed = atof(headers[0]);
+		current_rpm = atof(headers[1]);
+		count++;
+		a_speed = (a_speed*(count-1) + current_speed)/count;
+		a_rpm = (a_rpm*(count-1) + current_rpm)/count;
+		i=0;
+		
+	}
+	fclose(new_file);
+	current_average.average_speed = a_speed;
+	current_average.average_rpm = a_rpm;
+	return current_average;	
+	        
+}
