@@ -128,9 +128,11 @@ struct trip trip_average()
 		};
 		current_speed = atof(headers[0]);
 		current_rpm = atof(headers[1]);
-		count++;
-		a_speed = (a_speed*(count-1) + current_speed)/count;
-		a_rpm = (a_rpm*(count-1) + current_rpm)/count;
+		if (current_speed != 0){
+		        count++;
+		        a_speed = (a_speed*(count-1) + current_speed)/count;
+		        a_rpm = (a_rpm*(count-1) + current_rpm)/count;
+		}
 		i=0;
 		
 	}
