@@ -9,10 +9,10 @@ struct trip {
 };
 
 struct car {
-	char dongle[20];
-	char customer[20];
-	char started_at[20];
-	char finished_at[20];
+	char *dongle;
+	char *customer;
+	char *started_at;
+	char *finished_at;
 	float minute;
 	float consumption;
 	float mileage;
