@@ -10,7 +10,6 @@ int main(){
 	
 	car_info = read_line(car_info);
 	print_list(car_info);
-	free(car_info);
-	
+	free_list(car_info);
 }
 

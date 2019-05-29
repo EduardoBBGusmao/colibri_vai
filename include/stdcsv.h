@@ -27,3 +27,4 @@ struct car* insert_bottom(char* headers[9],struct car* head);
 void print_list(struct car* car_info);
 struct trip trip_average();
 char* convert_date(char* string);
+void free_list(struct car* car_info);

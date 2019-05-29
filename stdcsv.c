@@ -163,3 +163,15 @@ char* convert_date(char* string)
 	return date;
 	
 }
+
+void free_list(struct car* car_info){
+        struct car* curr = car_info;
+	while((curr = car_info) != NULL){
+	        car_info= car_info -> next_car;
+	        free(curr->dongle);
+	        free(curr->customer);
+	        free(curr->started_at);
+	        free(curr->finished_at);
+	        free(curr);
+	}
+}
