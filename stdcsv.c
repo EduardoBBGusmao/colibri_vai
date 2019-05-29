@@ -1,20 +1,18 @@
 #include "stdcsv.h"
 
-struct car* read_line(struct car* car_p){
-
+struct car* read_line(struct car* car_p)
+{
+	char line[128];
 	struct car* car_info = car_p;
 	FILE *new_file;
 	new_file = fopen(vai_file, "r");
 	if(!new_file){
+	
 	        printf("Error to open file ");
 	        exit(1);
 	}
 	        
-	char line[128];
-	
-	fgets ( line, sizeof line, new_file );
-	
-	
+		
 	while (fgets (line, sizeof line, new_file) != NULL){
 		char *ptr = strtok(line, csv_delimiter);
 		char *headers[9];
@@ -30,7 +28,8 @@ struct car* read_line(struct car* car_p){
 		
 		car_info = insert_bottom(headers, car_p);
 		free(temp);
-		free(ptr);		
+		free(ptr);
+		free(headers[9]);		
 	}
 	
 	fclose(new_file);
@@ -41,7 +40,7 @@ struct car* read_line(struct car* car_p){
 struct car* insert_bottom(char* headers[9],struct car* head) 
 {
 	struct car* current_node = head;
-	struct car* new_node;
+	struct car* new_node = 	(struct car*) malloc(sizeof(struct car));
  	float min = atof(headers[4]);
  	float cons = atof(headers[5])/1000;
  	float mil=atof(headers[6])/1000;
@@ -51,8 +50,7 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	while ( current_node != NULL && current_node->next_car != NULL) {
 		current_node = current_node->next_car;
 	}
-	
-	new_node = (struct car*) malloc(sizeof(struct car));
+	char* date = convert_date(headers[2]);
 	strcpy(new_node -> dongle, headers[0]);
 	strcpy(new_node -> customer, headers[1]);
 	strcpy(new_node -> started_at, headers[2]);
@@ -63,14 +61,14 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	new_node -> cost = val;
 	new_node -> kml = km;
 	new_node -> next_car= NULL;
-	//new_node -> trip_info = trip_average(); not working
+	new_node -> trip_info = trip_average(); //not working
 	
 	if (current_node != NULL){
 		current_node->next_car = new_node;
 	} else {
-		head = new_node;
+		return new_node;
 	}
-	// free(new_node); not working
+	//free(new_node); not working
 	return head;
 	
 }
@@ -85,12 +83,14 @@ void print_list(struct car* car_info)
 		printf("finished_at: %s || ", temp->finished_at);
 		printf("minute: %.2f || ", temp->minute);
 		printf("consumption: %.3f || ", temp->consumption);
+		printf("speed average: %.2f km/hr || ", temp->trip_info.average_speed);
+		printf("rpm average: %.2f rpm || ", temp->trip_info.average_rpm);
 		printf("mileage: %.3f km || ", temp->mileage);
 		printf("cost: R$ %.2f || ", temp->cost);
 		printf("kml: %.2f || ", temp->kml);
 		printf("\n");
-		if(temp -> next_car != NULL);
-		temp = temp -> next_car;
+		if(temp -> next_car != NULL)
+			temp = temp -> next_car;		
 	};
 	free(temp);
 }
@@ -136,9 +136,21 @@ struct trip trip_average()
 		i=0;
 		
 	}
+	
 	fclose(new_file);
+	free(new_file);
 	current_average.average_speed = a_speed;
 	current_average.average_rpm = a_rpm;
 	return current_average;	
 	        
+}
+
+char* convert_date(char* string)
+{
+	char* date = malloc(11*sizeof(char));
+	for(int j = 0; j < 10; j++){
+		date[j] = string[j];
+	}
+	date[10] = '\0';
+	printf("data -> %s \n", date);
 }
