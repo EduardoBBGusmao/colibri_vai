@@ -9,8 +9,6 @@ read_csv.o: read_csv.c
 stdcsv.o: stdcsv.c
 	$(CC) -c stdcsv.c
         
-clean:
-	rm -rf *.o
 	 
 valgrind:
 	valgrind -v --track-origins=yes --leak-check=full --show-reachable=yes --log-file='test/valgrind-out.txt' ./output
