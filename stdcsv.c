@@ -1,12 +1,12 @@
 #include "include/stdcsv.h"
 
 
-/* ******************************************
-*                                           *
-*       functions to read csv files         *
-*       and put in linked lists             *
-*                                           *
-*********************************************/
+/*
+ *                                           
+ * Functions to read csv files         
+ * and put in linked lists             
+ *
+ */
 
 
 struct car* read_line(struct car* car_p)
@@ -46,9 +46,9 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	struct car* new_node = (struct car*)malloc(sizeof(struct car));
  	float min = atof(headers[4]);
  	float cons = atof(headers[5])/1000;
- 	float mil=atof(headers[6])/1000;
+ 	float mil = atof(headers[6])/1000;
  	float val = atof(headers[7]);
- 	float km= atof(headers[8])/1000;
+ 	float km = atof(headers[8])/1000;
 	char* date_start = convert_date(headers[2]);
 	char* date_end = convert_date(headers[3]);
         char* dongle_id = (char*)malloc(20*sizeof(char));

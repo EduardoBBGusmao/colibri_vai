@@ -1,12 +1,16 @@
-
+CC=gcc
+EXEC=output
 output: read_csv.o stdcsv.o
-	gcc read_csv.o stdcsv.o -o output
+	$(CC) read_csv.o stdcsv.o -o output
 
 read_csv.o: read_csv.c
-	gcc -c read_csv.c
+	$(CC) -c read_csv.c
 
 stdcsv.o: stdcsv.c
-	gcc -c stdcsv.c
+	$(CC) -c stdcsv.c
         
 clean:
-	rm *.o output
+	rm -rf *.o
+	 
+valgrind:
+	valgrind -v --track-origins=yes --leak-check=full --show-reachable=yes --log-file='test/valgrind-out.txt' ./output
