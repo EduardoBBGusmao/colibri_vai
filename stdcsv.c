@@ -53,6 +53,20 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	char* date_end = convert_date(headers[3]);
         char* dongle_id = (char*)malloc(20*sizeof(char));
         char* customer = (char*)malloc(20*sizeof(char));
+        
+        if (!dongle_id){
+        	printf("allocation not possible");
+        	exit(1);
+        } 
+        if (!customer){
+        	printf("allocation not possible");
+        	exit(1);
+        }
+        if (!new_node){
+        	printf("allocation not possible");
+        	exit(1);
+        }
+     	
         strcpy(dongle_id, headers[0]);
         strcpy(customer, headers[1]);
         
@@ -154,17 +168,22 @@ struct trip trip_average()
 
 char* convert_date(char* string)
 {
-	char* date = malloc(11*sizeof(char));
+	char* date = malloc(11*sizeof(char)); 
+	if (!date){
+        	printf("allocation not possible");
+        	exit(1);
+        }
+	
 	for(int j = 0; j < 10; j++){
 		date[j] = string[j];
 	}
 	date[10] = '\0';
-	//printf("data -> %s \n", date);
 	return date;
 	
 }
 
-void free_list(struct car* car_info){
+void free_list(struct car* car_info)
+{
         struct car* curr = car_info;
 	while((curr = car_info) != NULL){
 	        car_info= car_info -> next_car;
