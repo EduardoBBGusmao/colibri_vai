@@ -83,7 +83,7 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	new_node -> cost = val;
 	new_node -> kml = km;
 	new_node -> next_car= NULL;
-	new_node -> trip_info = trip_average(); //not working
+	new_node -> trip_info = trip_average(headers[2]);
 
 	if (current_node != NULL){
 		current_node->next_car = new_node;
@@ -116,10 +116,10 @@ void print_list(struct car* car_info)
 	
 }
 
-struct trip trip_average()
+struct trip trip_average(char* reference)
 {
 	int count = 0;
-	int i=0;
+	int i = 0;
 	float current_speed;
 	float current_rpm;
 	float a_speed = 0;
@@ -140,22 +140,24 @@ struct trip trip_average()
 	while (fgets (line, sizeof line, new_file) != NULL){
 
 		char *ptr = strtok(line, csv_delimiter);
-		char *headers[3];
+		char *headers[4];
 
-		while(ptr != NULL || i < 3){	
+		while(ptr != NULL && i < 3){
 			headers[i] = ptr;
 			i++;
 			ptr = strtok(NULL, csv_delimiter);
 		};
-		current_speed = atof(headers[0]);
-		current_rpm = atof(headers[1]);
-		if (current_speed != 0){
-		        count++;
-		        a_speed = (a_speed*(count-1) + current_speed)/count;
-		        a_rpm = (a_rpm*(count-1) + current_rpm)/count;
+		if (!strcmp(headers[0], reference)){ 			
+			current_speed = atof(headers[1]);
+			current_rpm = atof(headers[2]);
+			
+			if (current_speed != 0){
+		        	count++;
+		        	a_speed = (a_speed*(count-1) + current_speed)/count;
+		        	a_rpm = (a_rpm*(count-1) + current_rpm)/count;
+			}
+			i=0;
 		}
-		i=0;
-
 	}
 
 	fclose(new_file);
