@@ -28,3 +28,5 @@ void print_list(struct car* car_info);
 struct trip trip_average(char* reference);
 char* convert_date(char* string);
 void free_list(struct car* car_info);
+struct car* insert_list(struct car* head, char* dongle_id, char* customer, char* date_start, char* date_end, float min, float cons, float mil, float val, float km, struct trip average_stats);
+void print_node(struct car* temp);

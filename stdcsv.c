@@ -69,10 +69,11 @@ struct car* insert_bottom(char* headers[9],struct car* head)
      	
         strcpy(dongle_id, headers[0]);
         strcpy(customer, headers[1]);
+   
+        while (current_node != NULL && current_node->next_car != NULL) {
+               	current_node = current_node->next_car;
+        }
         
-	while (current_node != NULL && current_node->next_car != NULL) {
-		current_node = current_node->next_car;
-	}
 	new_node -> dongle = dongle_id;
 	new_node -> customer = customer;
 	new_node -> started_at = date_start;
@@ -80,11 +81,11 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	new_node -> minute = min;
 	new_node -> consumption = cons;
 	new_node -> mileage = mil;
-	new_node -> cost = val;
-	new_node -> kml = km;
-	new_node -> next_car= NULL;
+        new_node -> cost = val;
+        new_node -> kml = km;
 	new_node -> trip_info = trip_average(headers[2]);
-
+	new_node -> next_car= NULL;
+	
 	if (current_node != NULL){
 		current_node->next_car = new_node;
 	} else {
@@ -94,28 +95,33 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	return head;
 
 }
+
 void print_list(struct car* car_info)
 {
 	struct car* temp = car_info->next_car;
 
 	while (temp != NULL){
-		printf("dongle_id: %s || ", *(&temp->dongle));
-		printf("customer: %s || ", temp->customer);
-		printf("started_at: %s || ", temp->started_at);
-		printf("finished_at: %s || ", temp->finished_at);
-		printf("minute: %.2f || ", temp->minute);
-		printf("consumption: %.3f || ", temp->consumption);
-		printf("speed average: %.2f km/hr || ", temp->trip_info.average_speed);
-		printf("rpm average: %.2f rpm || ", temp->trip_info.average_rpm);
-		printf("mileage: %.3f km || ", temp->mileage);
-		printf("cost: R$ %.2f || ", temp->cost);
-		printf("kml: %.2f || ", temp->kml);
-		printf("\n");
+		print_node(temp);
 		temp = temp -> next_car;
 	};
 	
 }
 
+void print_node(struct car* temp)
+{
+        printf("dongle_id: %s || ", *(&temp->dongle));
+	printf("customer: %s || ", temp->customer);
+	printf("started_at: %s || ", temp->started_at);
+	printf("finished_at: %s || ", temp->finished_at);
+	printf("minute: %.2f || ", temp->minute);
+	printf("consumption: %.3f || ", temp->consumption);
+	printf("speed average: %.2f km/hr || ", temp->trip_info.average_speed);
+	printf("rpm average: %.2f rpm || ", temp->trip_info.average_rpm);
+	printf("mileage: %.3f km || ", temp->mileage);
+	printf("cost: R$ %.2f || ", temp->cost);
+	printf("kml: %.2f || ", temp->kml);
+	printf("\n");
+}
 struct trip trip_average(char* reference)
 {
 	int count = 0;
@@ -187,12 +193,13 @@ char* convert_date(char* string)
 void free_list(struct car* car_info)
 {
         struct car* curr = car_info;
-	while((curr = car_info) != NULL){
+	if((curr = car_info) != NULL){
 	        car_info= car_info -> next_car;
 	        free(curr->dongle);
 	        free(curr->customer);
 	        free(curr->started_at);
 	        free(curr->finished_at);
 	        free(curr);
+	        free_list(car_info);
 	}
 }
