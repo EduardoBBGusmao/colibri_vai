@@ -17,7 +17,7 @@ struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* 
         struct car* temp = this_trip;
         
         while (current != NULL){
-        	if (data_range(current -> started_at,current -> finished_at, reference_start, reference_finished)) {
+        	if (data_range(current -> started_at, current -> finished_at, reference_start, reference_finished)) {
         	 
                         struct car* info_period = (struct car*)malloc(sizeof(struct car));
                         char* dongle_id = (char*)malloc(20*sizeof(char));
@@ -112,7 +112,8 @@ int leap_year(int year){
 int data_range(char* trip_date_start, char* trip_date_finished, char* request_start_date, char* request_finished_date)
 {
         if(date_to_days(request_start_date) <= date_to_days(trip_date_start) && 
-           date_to_days(trip_date_finished) < date_to_days(request_finished_date)){
+           date_to_days(trip_date_finished) < date_to_days(request_finished_date) &&
+           date_to_days(request_finished_date) > date_to_days(trip_date_start)){
                 return 1;
         	 }
         return 0;

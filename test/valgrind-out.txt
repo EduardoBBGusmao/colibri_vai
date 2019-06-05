@@ -1,1166 +1,413 @@
-==18714== Memcheck, a memory error detector
-==18714== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==18714== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
-==18714== Command: ./output
-==18714== Parent PID: 18713
-==18714== 
---18714-- 
---18714-- Valgrind options:
---18714--    -v
---18714--    --track-origins=yes
---18714--    --leak-check=full
---18714--    --show-reachable=yes
---18714--    --log-file=test/valgrind-out.txt
---18714-- Contents of /proc/version:
---18714--   Linux version 4.18.0-20-generic (buildd@lcy01-amd64-006) (gcc version 8.2.0 (Ubuntu 8.2.0-7ubuntu1)) #21-Ubuntu SMP Mon May 6 18:45:52 UTC 2019
---18714-- 
---18714-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
---18714-- Page sizes: currently 4096, max supported 4096
---18714-- Valgrind library directory: /usr/lib/valgrind
---18714-- Reading syms from /home/eduardogusmao/Documents/Colibri/colibri_vai/output
---18714-- Reading syms from /lib/x86_64-linux-gnu/ld-2.28.so
---18714--   Considering /lib/x86_64-linux-gnu/ld-2.28.so ..
---18714--   .. CRC mismatch (computed 5ec4c3b2 wanted 81437a46)
---18714--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.28.so ..
---18714--   .. CRC is valid
---18714-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
---18714--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
---18714--   .. CRC mismatch (computed 7d55ff08 wanted 5bd5b496)
---18714--    object doesn't have a symbol table
---18714--    object doesn't have a dynamic symbol table
---18714-- Scheduler: using generic scheduler lock implementation.
---18714-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==18714== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-18714-by-eduardogusmao-on-???
-==18714== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-18714-by-eduardogusmao-on-???
-==18714== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-18714-by-eduardogusmao-on-???
-==18714== 
-==18714== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==18714== don't want to do, unless you know exactly what you're doing,
-==18714== or are doing some strange experiment):
-==18714==   /usr/lib/valgrind/../../bin/vgdb --pid=18714 ...command...
-==18714== 
-==18714== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==18714==   /path/to/gdb ./output
-==18714== and then give GDB the following command
-==18714==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=18714
-==18714== --pid is optional if only one valgrind process is running
-==18714== 
---18714-- REDIR: 0x40203c0 (ld-linux-x86-64.so.2:strlen) redirected to 0x5805a041 (???)
---18714-- REDIR: 0x40201a0 (ld-linux-x86-64.so.2:index) redirected to 0x5805a05b (???)
---18714-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
---18714--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
---18714--   .. CRC mismatch (computed df1b7509 wanted fd78710c)
---18714--    object doesn't have a symbol table
---18714-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
---18714--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
---18714--   .. CRC mismatch (computed 4ed40f91 wanted 9c0db13a)
---18714--    object doesn't have a symbol table
-==18714== WARNING: new redirection conflicts with existing -- ignoring it
---18714--     old: 0x040203c0 (strlen              ) R-> (0000.0) 0x5805a041 ???
---18714--     new: 0x040203c0 (strlen              ) R-> (2007.0) 0x0483a970 strlen
---18714-- REDIR: 0x401cbe0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ba30 (strcmp)
---18714-- REDIR: 0x4020900 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x483edf0 (mempcpy)
---18714-- Reading syms from /lib/x86_64-linux-gnu/libc-2.28.so
---18714--   Considering /lib/x86_64-linux-gnu/libc-2.28.so ..
---18714--   .. CRC mismatch (computed f813393c wanted b5a550c8)
---18714--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.28.so ..
---18714--   .. CRC is valid
---18714-- REDIR: 0x48f7230 (libc.so.6:memmove) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f6430 (libc.so.6:strncpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f7510 (libc.so.6:strcasecmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f5e60 (libc.so.6:strcat) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f6460 (libc.so.6:rindex) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f8c80 (libc.so.6:rawmemchr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x4913c70 (libc.so.6:wcscmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f73a0 (libc.so.6:mempcpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f71d0 (libc.so.6:bcmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f63d0 (libc.so.6:strncmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f5ed0 (libc.so.6:strcmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f7300 (libc.so.6:memset) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x4913c40 (libc.so.6:wcschr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f6370 (libc.so.6:strnlen) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f5f60 (libc.so.6:strcspn) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f7560 (libc.so.6:strncasecmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f5f30 (libc.so.6:strcpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f76a0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f6490 (libc.so.6:strpbrk) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f5e90 (libc.so.6:index) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f6340 (libc.so.6:strlen) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x4900190 (libc.so.6:memrchr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f75b0 (libc.so.6:strcasecmp_l) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f71a0 (libc.so.6:memchr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x4913d50 (libc.so.6:wcslen) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f6730 (libc.so.6:strspn) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f74e0 (libc.so.6:stpncpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f74b0 (libc.so.6:stpcpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f8cb0 (libc.so.6:strchrnul) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x48f7600 (libc.so.6:strncasecmp_l) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
---18714-- REDIR: 0x49dfd30 (libc.so.6:__strrchr_avx2) redirected to 0x483a380 (rindex)
---18714-- REDIR: 0x48f1b90 (libc.so.6:malloc) redirected to 0x48376e0 (malloc)
---18714-- REDIR: 0x48f6c60 (libc.so.6:__GI_strstr) redirected to 0x483f050 (__strstr_sse2)
---18714-- REDIR: 0x49dbd90 (libc.so.6:__memchr_avx2) redirected to 0x483bad0 (memchr)
---18714-- REDIR: 0x49e0440 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x483dfb0 (memmove)
---18714-- REDIR: 0x49db310 (libc.so.6:__strspn_sse42) redirected to 0x483f250 (strspn)
---18714-- REDIR: 0x49db050 (libc.so.6:__strcspn_sse42) redirected to 0x483f190 (strcspn)
---18714-- REDIR: 0x49dff00 (libc.so.6:__strlen_avx2) redirected to 0x483a850 (strlen)
---18714-- REDIR: 0x49cc930 (libc.so.6:__strcpy_ssse3) redirected to 0x483a9a0 (strcpy)
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x1095A6: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
---18714-- REDIR: 0x49db440 (libc.so.6:__strcmp_avx2) redirected to 0x483b8f0 (strcmp)
---18714-- REDIR: 0x48f2310 (libc.so.6:free) redirected to 0x4838910 (free)
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C96: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
---18714-- REDIR: 0x49dfb40 (libc.so.6:__strchrnul_avx2) redirected to 0x483e920 (strchrnul)
---18714-- REDIR: 0x49e0420 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x483ea30 (mempcpy)
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109CA8: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109CC0: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109CCE: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a540 is 0 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a541 is 1 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a548 is 8 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a547 is 7 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a546 is 6 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483EA70: mempcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48E7951: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1243)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a548 is 8 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483EA81: mempcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48E7951: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1243)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a546 is 6 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5a0 is 0 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5a1 is 1 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5ac is 12 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5ab is 11 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5aa is 10 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a0 is 0 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a1 is 1 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a9 is 9 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a8 is 8 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a7 is 7 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f0 is 0 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f1 is 1 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f9 is 9 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f8 is 8 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f7 is 7 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== HEAP SUMMARY:
-==18714==     in use at exit: 432 bytes in 6 blocks
-==18714==   total heap usage: 45 allocs, 39 frees, 30,086 bytes allocated
-==18714== 
-==18714== Searching for pointers to 6 not-freed blocks
-==18714== Checked 70,456 bytes
-==18714== 
-==18714== 360 bytes in 5 blocks are indirectly lost in loss record 1 of 2
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109CE0: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 432 (72 direct, 360 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 2
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== LEAK SUMMARY:
-==18714==    definitely lost: 72 bytes in 1 blocks
-==18714==    indirectly lost: 360 bytes in 5 blocks
-==18714==      possibly lost: 0 bytes in 0 blocks
-==18714==    still reachable: 0 bytes in 0 blocks
-==18714==         suppressed: 0 bytes in 0 blocks
-==18714== 
-==18714== ERROR SUMMARY: 676 errors from 32 contexts (suppressed: 0 from 0)
-==18714== 
-==18714== 1 errors in context 1 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 1 errors in context 2 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 1 errors in context 3 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 1 errors in context 4 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 1 errors in context 5 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x1095A6: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a heap allocation
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 6 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f8 is 8 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 7 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f9 is 9 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 8 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f0 is 0 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 9 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a8 is 8 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 10 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a9 is 9 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 11 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a0 is 0 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 12 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5ab is 11 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 13 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5ac is 12 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 14 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5a0 is 0 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 15 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79A8: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a547 is 7 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 16 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E7995: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a548 is 8 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 17 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A852: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a540 is 0 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 18 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109CCE: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 19 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109CC0: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 20 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109CA8: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 5 errors in context 21 of 32:
-==18714== Conditional jump or move depends on uninitialised value(s)
-==18714==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
-==18714==    by 0x489E47F: atoi (atoi.c:27)
-==18714==    by 0x109E85: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C96: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Uninitialised value was created by a stack allocation
-==18714==    at 0x109DD3: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 35 errors in context 22 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a546 is 6 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 40 errors in context 23 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f7 is 7 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 40 errors in context 24 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a7 is 7 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 45 errors in context 25 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a541 is 1 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 50 errors in context 26 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097E5: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4f1 is 1 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C28: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094CF: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 50 errors in context 27 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097C9: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a4a1 is 1 bytes inside a block of size 11 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C18: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109B51: convert_date (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x1094B8: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 55 errors in context 28 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x48E79C4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1226)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5aa is 10 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 65 errors in context 29 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483A864: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48BA31D: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x1097AD: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a5a1 is 1 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109C08: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094EB: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 90 errors in context 30 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483EA81: mempcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48E7951: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1243)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a546 is 6 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== 
-==18714== 120 errors in context 31 of 32:
-==18714== Invalid read of size 1
-==18714==    at 0x483EA70: mempcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x48E7951: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1243)
-==18714==    by 0x48B9018: vfprintf (vfprintf.c:1638)
-==18714==    by 0x48C1995: printf (printf.c:33)
-==18714==    by 0x109791: print_node (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109754: print_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109272: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Address 0x4a4a548 is 8 bytes inside a block of size 20 free'd
-==18714==    at 0x483897B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x109BF8: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109C40: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==  Block was alloc'd at
-==18714==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==18714==    by 0x1094DD: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x10935F: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
-==18714== 
-==18714== ERROR SUMMARY: 676 errors from 32 contexts (suppressed: 0 from 0)
+==31157== Memcheck, a memory error detector
+==31157== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==31157== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==31157== Command: ./output
+==31157== Parent PID: 31156
+==31157== 
+--31157-- 
+--31157-- Valgrind options:
+--31157--    -v
+--31157--    --track-origins=yes
+--31157--    --leak-check=full
+--31157--    --show-reachable=yes
+--31157--    --log-file=test/valgrind-out.txt
+--31157-- Contents of /proc/version:
+--31157--   Linux version 4.18.0-20-generic (buildd@lcy01-amd64-006) (gcc version 8.2.0 (Ubuntu 8.2.0-7ubuntu1)) #21-Ubuntu SMP Mon May 6 18:45:52 UTC 2019
+--31157-- 
+--31157-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--31157-- Page sizes: currently 4096, max supported 4096
+--31157-- Valgrind library directory: /usr/lib/valgrind
+--31157-- Reading syms from /home/eduardogusmao/Documents/Colibri/colibri_vai/output
+--31157-- Reading syms from /lib/x86_64-linux-gnu/ld-2.28.so
+--31157--   Considering /lib/x86_64-linux-gnu/ld-2.28.so ..
+--31157--   .. CRC mismatch (computed 5ec4c3b2 wanted 81437a46)
+--31157--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.28.so ..
+--31157--   .. CRC is valid
+--31157-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--31157--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--31157--   .. CRC mismatch (computed 7d55ff08 wanted 5bd5b496)
+--31157--    object doesn't have a symbol table
+--31157--    object doesn't have a dynamic symbol table
+--31157-- Scheduler: using generic scheduler lock implementation.
+--31157-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==31157== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-31157-by-eduardogusmao-on-???
+==31157== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-31157-by-eduardogusmao-on-???
+==31157== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-31157-by-eduardogusmao-on-???
+==31157== 
+==31157== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==31157== don't want to do, unless you know exactly what you're doing,
+==31157== or are doing some strange experiment):
+==31157==   /usr/lib/valgrind/../../bin/vgdb --pid=31157 ...command...
+==31157== 
+==31157== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==31157==   /path/to/gdb ./output
+==31157== and then give GDB the following command
+==31157==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=31157
+==31157== --pid is optional if only one valgrind process is running
+==31157== 
+--31157-- REDIR: 0x40203c0 (ld-linux-x86-64.so.2:strlen) redirected to 0x5805a041 (???)
+--31157-- REDIR: 0x40201a0 (ld-linux-x86-64.so.2:index) redirected to 0x5805a05b (???)
+--31157-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--31157--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--31157--   .. CRC mismatch (computed df1b7509 wanted fd78710c)
+--31157--    object doesn't have a symbol table
+--31157-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--31157--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--31157--   .. CRC mismatch (computed 4ed40f91 wanted 9c0db13a)
+--31157--    object doesn't have a symbol table
+==31157== WARNING: new redirection conflicts with existing -- ignoring it
+--31157--     old: 0x040203c0 (strlen              ) R-> (0000.0) 0x5805a041 ???
+--31157--     new: 0x040203c0 (strlen              ) R-> (2007.0) 0x0483a970 strlen
+--31157-- REDIR: 0x401cbe0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483ba30 (strcmp)
+--31157-- REDIR: 0x4020900 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x483edf0 (mempcpy)
+--31157-- Reading syms from /lib/x86_64-linux-gnu/libc-2.28.so
+--31157--   Considering /lib/x86_64-linux-gnu/libc-2.28.so ..
+--31157--   .. CRC mismatch (computed f813393c wanted b5a550c8)
+--31157--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.28.so ..
+--31157--   .. CRC is valid
+--31157-- REDIR: 0x48f7230 (libc.so.6:memmove) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f6430 (libc.so.6:strncpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f7510 (libc.so.6:strcasecmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f5e60 (libc.so.6:strcat) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f6460 (libc.so.6:rindex) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f8c80 (libc.so.6:rawmemchr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x4913c70 (libc.so.6:wcscmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f73a0 (libc.so.6:mempcpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f71d0 (libc.so.6:bcmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f63d0 (libc.so.6:strncmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f5ed0 (libc.so.6:strcmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f7300 (libc.so.6:memset) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x4913c40 (libc.so.6:wcschr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f6370 (libc.so.6:strnlen) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f5f60 (libc.so.6:strcspn) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f7560 (libc.so.6:strncasecmp) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f5f30 (libc.so.6:strcpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f76a0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f6490 (libc.so.6:strpbrk) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f5e90 (libc.so.6:index) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f6340 (libc.so.6:strlen) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x4900190 (libc.so.6:memrchr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f75b0 (libc.so.6:strcasecmp_l) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f71a0 (libc.so.6:memchr) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x4913d50 (libc.so.6:wcslen) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f6730 (libc.so.6:strspn) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f74e0 (libc.so.6:stpncpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f74b0 (libc.so.6:stpcpy) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f8cb0 (libc.so.6:strchrnul) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x48f7600 (libc.so.6:strncasecmp_l) redirected to 0x482d1b0 (_vgnU_ifunc_wrapper)
+--31157-- REDIR: 0x49dfd30 (libc.so.6:__strrchr_avx2) redirected to 0x483a380 (rindex)
+--31157-- REDIR: 0x48f1b90 (libc.so.6:malloc) redirected to 0x48376e0 (malloc)
+--31157-- REDIR: 0x48f6c60 (libc.so.6:__GI_strstr) redirected to 0x483f050 (__strstr_sse2)
+--31157-- REDIR: 0x49dbd90 (libc.so.6:__memchr_avx2) redirected to 0x483bad0 (memchr)
+--31157-- REDIR: 0x49e0440 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x483dfb0 (memmove)
+--31157-- REDIR: 0x49db310 (libc.so.6:__strspn_sse42) redirected to 0x483f250 (strspn)
+--31157-- REDIR: 0x49db050 (libc.so.6:__strcspn_sse42) redirected to 0x483f190 (strcspn)
+--31157-- REDIR: 0x49dff00 (libc.so.6:__strlen_avx2) redirected to 0x483a850 (strlen)
+--31157-- REDIR: 0x49cc930 (libc.so.6:__strcpy_ssse3) redirected to 0x483a9a0 (strcpy)
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x1095B2: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10936B: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+--31157-- REDIR: 0x49db440 (libc.so.6:__strcmp_avx2) redirected to 0x483b8f0 (strcmp)
+--31157-- REDIR: 0x48f2310 (libc.so.6:free) redirected to 0x4838910 (free)
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FBD: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+--31157-- REDIR: 0x49dfb40 (libc.so.6:__strchrnul_avx2) redirected to 0x483e920 (strchrnul)
+--31157-- REDIR: 0x49e0420 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x483ea30 (mempcpy)
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FCB: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FDB: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FE9: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FF9: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10A007: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B42: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B52: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B62: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B72: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B42: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B52: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B62: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B72: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== HEAP SUMMARY:
+==31157==     in use at exit: 0 bytes in 0 blocks
+==31157==   total heap usage: 45 allocs, 45 frees, 29,860 bytes allocated
+==31157== 
+==31157== All heap blocks were freed -- no leaks are possible
+==31157== 
+==31157== ERROR SUMMARY: 31 errors from 15 contexts (suppressed: 0 from 0)
+==31157== 
+==31157== 1 errors in context 1 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B72: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 2 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B62: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 3 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B52: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 4 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B42: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10927E: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109224: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 5 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B72: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 6 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B62: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 7 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B52: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 8 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x4838931: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109B42: free_list (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109266: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 9 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10A007: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 10 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FF9: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 1 errors in context 11 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x1095B2: insert_bottom (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x10936B: read_line (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109234: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a heap allocation
+==31157==    at 0x483774F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31157==    by 0x109216: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 5 errors in context 12 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FE9: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 5 errors in context 13 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FDB: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 5 errors in context 14 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FCB: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== 
+==31157== 5 errors in context 15 of 15:
+==31157== Conditional jump or move depends on uninitialised value(s)
+==31157==    at 0x48A25C7: ____strtol_l_internal (strtol_l.c:434)
+==31157==    by 0x489E47F: atoi (atoi.c:27)
+==31157==    by 0x109E22: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109FBD: data_range (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109BEC: get_trips_period (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==    by 0x109256: main (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157==  Uninitialised value was created by a stack allocation
+==31157==    at 0x109D70: date_to_days (in /home/eduardogusmao/Documents/Colibri/colibri_vai/output)
+==31157== 
+==31157== ERROR SUMMARY: 31 errors from 15 contexts (suppressed: 0 from 0)
