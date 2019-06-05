@@ -15,7 +15,7 @@ struct car* read_line(struct car* car_p)
 	FILE *new_file;
 	new_file = fopen(vai_file, "r");
 	if(!new_file){
-	        printf("Error to open file ");
+	        printf("Error when opening file\n");
 	        exit(1);
 	}
 
@@ -122,6 +122,7 @@ void print_node(struct car* temp)
 	printf("kml: %.2f || ", temp->kml);
 	printf("\n");
 }
+
 struct trip trip_average(char* reference)
 {
 	int count = 0;
@@ -194,7 +195,7 @@ void free_list(struct car* car_info)
 {
         struct car* curr = car_info;
 	if((curr = car_info) != NULL){
-	        car_info= car_info -> next_car;
+	        car_info = car_info -> next_car;
 	        free(curr->dongle);
 	        free(curr->customer);
 	        free(curr->started_at);

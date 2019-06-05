@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+        "settings": {
+                "files.associations": {
+                        "stdcsv.h": "c",
+                        "stdlib.h": "c",
+                        "data_operation.h": "c"
+                }
+        }
+}

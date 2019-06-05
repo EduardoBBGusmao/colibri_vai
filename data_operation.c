@@ -20,10 +20,30 @@ struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* 
         	if (data_range(current -> started_at, current -> finished_at, reference_start, reference_finished)) {
         	 
                         struct car* info_period = (struct car*)malloc(sizeof(struct car));
+                        if (!info_period) {
+                                printf("Error allocating: info_period\n");
+                                exit(1);
+                        }
                         char* dongle_id = (char*)malloc(20*sizeof(char));
+                        if (!dongle_id) {
+                                printf("Error allocating: dongle_id\n");
+                                exit(1);
+                        }
                         char* customer = (char*)malloc(20*sizeof(char));
+                        if (!customer) {
+                                printf("Error allocating: customer\n");
+                                exit(1);
+                        }
 	                char* date_start = malloc(11*sizeof(char)); 
-	                char* date_finish = malloc(11*sizeof(char)); 
+                        if (!date_start) {
+                                printf("Error allocating: date_start\n");
+                                exit(1);
+                        }
+	                char* date_finish = malloc(11*sizeof(char));
+                        if (!date_finish) {
+                                printf("Error allocating: date_finish\n");
+                                exit(1);
+                        }
         	        
         	        strcpy(dongle_id, current->dongle);
         	        strcpy(customer, current->customer);
@@ -70,7 +90,7 @@ int date_to_days(char* date)
         for(int i =6; i<10; i++){
                 year[i-6] = date[i];
         }
-        year[5] = '\0';
+        year[4] = '\0';
         day_num = atoi(day);
         mounth_num = atoi(mounth);
         year_num = atoi(year);
@@ -91,7 +111,7 @@ int date_to_days(char* date)
 
 int mounth_days(int mounth, int year)
 {
-        if (mounth == 1 || mounth == 3 || mounth == 5 || mounth == 7 || mounth == 8 || mounth == 10 || mounth == 12){
+        if (mounth == 1 || mounth == 3 || mounth == 5 || mounth == 7 || mounth == 8 || mounth == 10 || mounth == 12) {
                 return 31;
         } else if (mounth == 2 && leap_year(year)) {
                 return 29;
@@ -102,20 +122,19 @@ int mounth_days(int mounth, int year)
         }       
 }
 
-int leap_year(int year){
-        if (year % 4 == 0 && (year % 100 !=0 || year % 100 == 0)){
-                return 1;
-        }
-        return 0;
+int leap_year(int year)
+{
+        int is_leap = year % 4 == 0 && (year % 100 !=0 || year % 100 == 0);
+        return is_leap;
 }
 
 int data_range(char* trip_date_start, char* trip_date_finished, char* request_start_date, char* request_finished_date)
 {
-        if(date_to_days(request_start_date) <= date_to_days(trip_date_start) && 
+        if (date_to_days(request_start_date) <= date_to_days(trip_date_start) && 
            date_to_days(trip_date_finished) < date_to_days(request_finished_date) &&
-           date_to_days(request_finished_date) > date_to_days(trip_date_start)){
+           date_to_days(request_finished_date) > date_to_days(trip_date_start)) {
                 return 1;
-        	 }
+        }
         return 0;
 }
 
