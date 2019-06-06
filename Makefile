@@ -2,7 +2,7 @@ CC=gcc
 EXEC=output
 output: read_csv.o stdcsv.o data_operation.o
 	$(CC) -g read_csv.o stdcsv.o data_operation.o -o output
-
+	
 read_csv.o: read_csv.c
 	$(CC) -c read_csv.c
 

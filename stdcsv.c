@@ -196,7 +196,7 @@ void free_list(struct car* car_info)
 	        free(curr->customer);
 	        free(curr->started_at);
 	        free(curr->finished_at);
-	        //free(&curr);
+	        free(curr);
 	        free_list(car_info);
 	}
 }

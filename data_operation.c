@@ -6,7 +6,7 @@
  * returns tips to improve car autonomy 
  *
  */
- 
+
 int* check_autonomy(struct car* car_info)
 {
         int x[] = {85,1,2,3,4};
