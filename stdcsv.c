@@ -18,8 +18,6 @@ struct car* read_line(struct car* car_p)
 	        printf("Error when opening file\n");
 	        exit(1);
 	}
-
-
 	while (fgets (line, sizeof line, new_file) != NULL){
 		char *ptr = strtok(line, csv_delimiter);
 		char *headers[9];
@@ -34,10 +32,8 @@ struct car* read_line(struct car* car_p)
 
 		car_p = insert_bottom(headers, car_p);
 	}
-	
 	fclose(new_file);
 	return car_p;
-
 }
 
 struct car* insert_bottom(char* headers[9],struct car* head) 
@@ -200,7 +196,7 @@ void free_list(struct car* car_info)
 	        free(curr->customer);
 	        free(curr->started_at);
 	        free(curr->finished_at);
-	        free(curr);
+	        //free(&curr);
 	        free_list(car_info);
 	}
 }
