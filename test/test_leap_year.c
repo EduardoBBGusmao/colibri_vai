@@ -7,9 +7,9 @@ int main()
         int year = 2098;
         for (; year <= 2100; year++) {
                 //printf("%d is ",year);
-                int is_leap_year = leap_year(year);
-                if (is_leap_year == 0) {
-                     //printf(" not ");   
+                int isleapyear = leap_year(year);
+                if (isleapyear == 0) {
+                     printf(" not ");   
                 }
                 //printf("a leap year.\n");
         }

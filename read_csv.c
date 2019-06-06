@@ -6,8 +6,9 @@
 
 int main(){
 
-	struct car* car_info = (struct car*)malloc(sizeof(struct car));
+	struct car* car_info = NULL;
 	struct car* temp = (struct car*)malloc(sizeof(struct car));
+	//struct car* temp = NULL;
 	
 	car_info = read_line(car_info);
 	temp = choose_data_range(car_info,temp);

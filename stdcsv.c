@@ -190,13 +190,13 @@ char* convert_date(char* string)
 void free_list(struct car* car_info)
 {
         struct car* curr = car_info;
-	if((curr = car_info) != NULL){
+	if(curr != NULL){
 	        car_info = car_info -> next_car;
+	        free_list(car_info);
 	        free(curr->dongle);
 	        free(curr->customer);
 	        free(curr->started_at);
 	        free(curr->finished_at);
 	        free(curr);
-	        free_list(car_info);
 	}
 }

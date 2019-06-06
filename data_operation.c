@@ -10,7 +10,7 @@
 int* check_autonomy(struct car* car_info)
 {
         int x[] = {85,1,2,3,4};
-	return x;
+	return &x;
 }
 
 struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* reference_start, char* reference_finished)
@@ -43,6 +43,7 @@ struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* 
         	        info_period -> kml = current->kml;
         	        info_period -> trip_info = current->trip_info;  
         	        info_period -> next_car = NULL;    
+        	        
         	        
         	        temp -> next_car = info_period;
         		temp = temp -> next_car;
@@ -140,7 +141,8 @@ struct car* choose_data_range (struct car* car_info, struct car* temp)
 void print_perfomance(struct car* car_info)
 {
         print_list(car_info);
-        //int* autonomy = check_autonomy(car_info);
+        /*int* autonomy = malloc(5*sizeof(int));
+        autonomy = check_autonomy(car_info);*/
         int autonomy[] = {85,2,3,4,5};
         printf("\nFoi obtido %d%% do seu desempenho ideal\n", (autonomy[0]));
         printf("A troca de marcha foi feita %d vezes de modo equivocado\n", (autonomy[1]+autonomy[2]));
