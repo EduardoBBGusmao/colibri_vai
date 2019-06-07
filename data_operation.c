@@ -21,32 +21,16 @@ struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* 
         while (current != NULL){
         	if (data_range(current -> started_at, current -> finished_at, reference_start, reference_finished)) {
         	 
-                        struct car* info_period = (struct car*)malloc(sizeof(struct car));
-                        char* dongle_id = (char*)malloc(20*sizeof(char));
-                        char* customer = (char*)malloc(20*sizeof(char));
-	                char* date_start = malloc(11*sizeof(char)); 
-	                char* date_finish = malloc(11*sizeof(char)); 
+                        char* headers[4] = {current->dongle, current->customer, current->started_at, current->finished_at};
+        	        float headers_float[5];
+        	        headers_float[0] = current->minute;
+ 			headers_float[1] = current->consumption;
+ 			headers_float[2] = current->mileage;
+ 			headers_float[3] = current->cost;
+ 			headers_float[4] = current->kml;
         	        
-        	        strcpy(dongle_id, current->dongle);
-        	        strcpy(customer, current->customer);
-        	        strcpy(date_start, current->started_at); 
-        	        strcpy(date_finish, current->finished_at); 
+        	        this_trip = insert_bottom(headers_float, headers, this_trip);
         	        
-        	        info_period -> dongle = dongle_id;
-        	        info_period -> customer = customer;
-        	        info_period -> started_at = date_start;
-        	        info_period -> finished_at = date_finish;
-        	        info_period -> minute = current->minute;
-        	        info_period -> consumption = current->consumption;
-        	        info_period -> mileage = current->mileage;
-        	        info_period -> cost = current->cost;
-        	        info_period -> kml = current->kml;
-        	        info_period -> trip_info = current->trip_info;  
-        	        info_period -> next_car = NULL;    
-        	        
-        	        
-        	        temp -> next_car = info_period;
-        		temp = temp -> next_car;
         		
 			}
 		current = current ->next_car;
@@ -106,7 +90,7 @@ int mounth_days(int mounth, int year)
 
 int leap_year(int year)
 {
-        if (year % 4 == 0 && (year % 100 !=0 || year % 100 == 0)){
+        if (year % 4 == 0 && (year % 100 !=0 || year % 400 == 0)){
                 return 366;
         }
         return 365;
@@ -128,13 +112,12 @@ struct car* choose_data_range (struct car* car_info, struct car* temp)
         char* start_data = malloc(11*sizeof(char)); 
         char* finish_data = malloc(11*sizeof(char));     
         
-        printf("Escolha Período Inicial (Ex. 15/11/1995): ");
-        //scanf("%s", start_data);
-        printf("Escolha Período Final (Ex. 15/11/1995): ");
-        //scanf("%s", finish_data);
-        temp = get_trips_period(car_info,temp, "15/11/1995","20/10/2019"/*start_data, finish_data*/);
+        scanf("%s", start_data);
+        scanf("%s", finish_data);
+        temp = get_trips_period(car_info,temp, start_data, finish_data*/);
         free(start_data);
         free(finish_data);
+        
         return temp;
 }
 
@@ -143,7 +126,9 @@ void print_perfomance(struct car* car_info)
         print_list(car_info);
         /*int* autonomy = malloc(5*sizeof(int));
         autonomy = check_autonomy(car_info);*/
-        int autonomy[] = {85,2,3,4,5};
+        int autonomy[] = {85,2,3,4,5}; // 
+        
+        
         printf("\nFoi obtido %d%% do seu desempenho ideal\n", (autonomy[0]));
         printf("A troca de marcha foi feita %d vezes de modo equivocado\n", (autonomy[1]+autonomy[2]));
         printf("A marcha foi trocada %d vezes de maneira antecipadamente\n", autonomy[1]);

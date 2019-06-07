@@ -21,6 +21,7 @@ struct car* read_line(struct car* car_p)
 	while (fgets (line, sizeof line, new_file) != NULL){
 		char *ptr = strtok(line, csv_delimiter);
 		char *headers[9];
+		float headers_float[5];
 		int i=0;
 
 
@@ -29,22 +30,22 @@ struct car* read_line(struct car* car_p)
 			i++;
 			ptr = strtok(NULL, csv_delimiter);
 		}
-
-		car_p = insert_bottom(headers, car_p);
+		headers_float[0] = atof(headers[4]);
+ 		headers_float[1] = atof(headers[5])/1000;
+ 		headers_float[2] = atof(headers[6])/1000;
+ 		headers_float[3] = atof(headers[7]);
+ 		headers_float[4] = atof(headers[8])/1000;
+		car_p = insert_bottom(headers_float, headers, car_p);
 	}
 	fclose(new_file);
 	return car_p;
 }
 
-struct car* insert_bottom(char* headers[9],struct car* head) 
+struct car* insert_bottom(float headers_float[5], char* headers[4],struct car* head) 
 {
 	struct car* current_node = head;
 	struct car* new_node = (struct car*)malloc(sizeof(struct car));
- 	float min = atof(headers[4]);
- 	float cons = atof(headers[5])/1000;
- 	float mil = atof(headers[6])/1000;
- 	float val = atof(headers[7]);
- 	float km = atof(headers[8])/1000;
+ 	
 	char* date_start = convert_date(headers[2]);
 	char* date_end = convert_date(headers[3]);
         char* dongle_id = (char*)malloc(20*sizeof(char));
@@ -64,6 +65,7 @@ struct car* insert_bottom(char* headers[9],struct car* head)
         }
      	
         strcpy(dongle_id, headers[0]);
+        
         strcpy(customer, headers[1]);
    
         while (current_node != NULL && current_node->next_car != NULL) {
@@ -74,11 +76,11 @@ struct car* insert_bottom(char* headers[9],struct car* head)
 	new_node -> customer = customer;
 	new_node -> started_at = date_start;
 	new_node -> finished_at = date_end;
-	new_node -> minute = min;
-	new_node -> consumption = cons;
-	new_node -> mileage = mil;
-        new_node -> cost = val;
-        new_node -> kml = km;
+	new_node -> minute = headers_float[0];
+	new_node -> consumption = headers_float[1];
+	new_node -> mileage = headers_float[2];
+        new_node -> cost = headers_float[3];
+        new_node -> kml = headers_float[4];
 	new_node -> trip_info = trip_average(headers[2]);
 	new_node -> next_car= NULL;
 	
