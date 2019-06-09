@@ -1,5 +1,6 @@
 #include "include/stdcsv.h"
 #include "include/data_operation.h"
+#include <time.h>
 
 /*
  * This file contains functions that 
@@ -19,7 +20,7 @@ int* check_autonomy(struct car* car_info, int autonomy[5])
 
 struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* reference_start, char* reference_finished)
 {
-	struct car* current = car_info -> next_car;
+	struct car* current = car_info;
         struct car* temp = this_trip;
         
         while (current != NULL){
@@ -39,6 +40,7 @@ struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* 
 			}
 		current = current ->next_car;
         }
+        print_list(this_trip);
         return this_trip;
 }
 
@@ -110,24 +112,27 @@ int data_range(char* trip_date_start, char* trip_date_finished, char* request_st
         return 0;
 }
 
-
-struct car* choose_data_range (struct car* car_info, struct car* temp)
+struct car* choose_data_range (struct car* car_info, struct car* temp,char date[11])
 {
-        char* start_data = malloc(11*sizeof(char)); 
-        char* finish_data = malloc(11*sizeof(char));     
-        
-        scanf("%s", start_data);
-        scanf("%s", finish_data);
-        temp = get_trips_period(car_info,temp, start_data, finish_data);
-        free(start_data);
-        free(finish_data);
-        
+        char* start_date = malloc(11*sizeof(char)); 
+        char* finish_date;     
+        int last_sunday;
+	finish_date = today_date(finish_date);
+        last_sunday= date_to_days(finish_date)-7+2990; 
+        if (get_weekday(today_date(date)) == 0){
+        	start_date = days_to_date(last_sunday, start_date);
+        	printf("last+ %d, is sunday: %s\n", last_sunday, start_date); 
+        }
+        printf("fi: %s n: %d\n", finish_date,date_to_days(finish_date));
+        printf("fi: %s n: %d\n", start_date,date_to_days(start_date));
+        temp = get_trips_period(car_info,temp, start_date, finish_date);//start_date, finish_date);
+    	free(start_date);
+        free(finish_date);
         return temp;
 }
 
 void print_perfomance(struct car* car_info)
 {
-        print_list(car_info);
         int* autonomy;
         autonomy = check_autonomy(car_info, autonomy);
         
@@ -138,4 +143,95 @@ void print_perfomance(struct car* car_info)
         printf("%d acerelações bruscas\n", autonomy[3]);
         printf("%d frenagens bruscas\n", autonomy[4]);
 
+}
+
+int get_weekday(char * str) 
+{
+	struct tm tm;
+	memset((void *) &tm, 0, sizeof(tm));
+	if (strptime(str, "%d/%m/%Y", &tm)) {
+		time_t t = mktime(&tm);
+		if (t >= 0) {
+      			return localtime(&t)->tm_wday; // Sunday=0, Monday=1, etc.
+    		}
+  	}
+  	return -1;
+}
+
+char* today_date(char* date)
+{	
+	date = malloc(11*sizeof(char));
+	char year[4];
+	char mounth[2];
+	char day[2];
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);
+	
+	sprintf(year, "%d", tm.tm_year+1900);
+	year[4] = '\0';
+	sprintf(mounth, "%d", tm.tm_mon+1);
+	if (tm.tm_mon+1 <10){
+	mounth[1] = mounth[0];
+	mounth[0] = '0';
+	}
+	sprintf(day, "%d", tm.tm_mday);
+	if (tm.tm_mday <10){
+	day[1] = day[0];
+	day[0] = '0';
+	}
+	date[0] = day[0];
+	date[1] = day[1];
+	date[2] = '/';
+	date[3] = mounth[0];
+	date[4] = mounth[1];
+	date[5] = '/';
+	date[6] = year[0];
+	date[7] = year[1];
+	date[8] = year[2];
+	date[9] = year[3];
+	date[10] = '\0';
+	printf("%s\n",date);
+	
+	return date;	
+}
+
+char* days_to_date(int g, char date[11])
+{
+	int y = (10000*g + 14780)/3652425;
+	int ddd = g - (365*y + y/4 - y/100 + y/400);
+	if (ddd < 0) {
+		y = y - 1;
+		ddd = g - (365*y + y/4 - y/100 + y/400);
+	}
+	int mi = (100*ddd + 52)/3060;
+	int mm = (mi + 2)%12 + 1;
+	y = y + (mi + 2)/12;
+	int dd = ddd - (mi*306 + 5)/10 + 1;
+	char str_day[2];
+	char str_m[2];
+	char str_y[4];
+	sprintf(str_day, "%d", dd);
+	if (dd <10){
+		str_day[1] = str_day[0];
+		str_day[0] = '0';
+	}
+	sprintf(str_m,"%d", mm);
+	if (mm <10){
+		str_m[1] = str_m[0];
+		str_m[0] = '0';
+	}
+	sprintf(str_y, "%d",y); 
+	date[0] = str_day[0];
+	date[1] = str_day[1];
+	date[2] = '/';
+	date[3] = str_m[0];
+	date[4] = str_m[1];
+	date[5] = '/';
+	date[6] = str_y[0];
+	date[7] = str_y[1];
+	date[8] = str_y[2];
+	date[9] = str_y[3];
+	date[10] = '\0';
+	
+	return date;
 }

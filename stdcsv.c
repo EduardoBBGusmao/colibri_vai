@@ -96,7 +96,7 @@ struct car* insert_bottom(float headers_float[5], char* headers[4],struct car* h
 
 void print_list(struct car* car_info)
 {
-	struct car* temp = car_info->next_car;
+	struct car* temp = car_info;
 
 	while (temp != NULL){
 		print_node(temp);
