@@ -8,8 +8,9 @@
  *
  */
 
-int* check_autonomy(struct car* car_info, int autonomy[5])
+int* check_autonomy(struct car* car_info, int* autonomy)
 {
+        autonomy = malloc(5*sizeof(int));
         autonomy[0] = 85;
         autonomy[1] = 1;
         autonomy[2] = 2;
@@ -112,22 +113,21 @@ int data_range(char* trip_date_start, char* trip_date_finished, char* request_st
         return 0;
 }
 
-struct car* choose_data_range (struct car* car_info, struct car* temp,char date[11])
+struct car* choose_data_range (struct car* car_info, struct car* temp,char* date)
 {
-        char* start_date = malloc(11*sizeof(char)); 
+        char* start_date; 
         char* finish_date;     
         int last_sunday;
 	finish_date = today_date(finish_date);
         last_sunday= date_to_days(finish_date)-7+2990; 
-        if (get_weekday(today_date(date)) == 0){
+        if (get_weekday(finish_date) == 1){
         	start_date = days_to_date(last_sunday, start_date);
-        	printf("last+ %d, is sunday: %s\n", last_sunday, start_date); 
         }
-        printf("fi: %s n: %d\n", finish_date,date_to_days(finish_date));
-        printf("fi: %s n: %d\n", start_date,date_to_days(start_date));
-        temp = get_trips_period(car_info,temp, start_date, finish_date);//start_date, finish_date);
+        temp = get_trips_period(car_info,temp, start_date, finish_date);
     	free(start_date);
         free(finish_date);
+        
+        
         return temp;
 }
 
@@ -142,6 +142,7 @@ void print_perfomance(struct car* car_info)
         printf("A marcha foi trocada %d vezes de maneira tardiamente\n", autonomy[2]);
         printf("%d acerelações bruscas\n", autonomy[3]);
         printf("%d frenagens bruscas\n", autonomy[4]);
+        free(autonomy);
 
 }
 
@@ -161,14 +162,15 @@ int get_weekday(char * str)
 char* today_date(char* date)
 {	
 	date = malloc(11*sizeof(char));
-	char year[4];
-	char mounth[2];
-	char day[2];
+	char year[5];
+	char mounth[3];
+	char day[3];
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	
 	sprintf(year, "%d", tm.tm_year+1900);
 	year[4] = '\0';
+	    
 	sprintf(mounth, "%d", tm.tm_mon+1);
 	if (tm.tm_mon+1 <10){
 	mounth[1] = mounth[0];
@@ -190,13 +192,13 @@ char* today_date(char* date)
 	date[8] = year[2];
 	date[9] = year[3];
 	date[10] = '\0';
-	printf("%s\n",date);
 	
 	return date;	
 }
 
-char* days_to_date(int g, char date[11])
+char* days_to_date(int g, char* date)
 {
+        date = malloc(11*sizeof(char));       
 	int y = (10000*g + 14780)/3652425;
 	int ddd = g - (365*y + y/4 - y/100 + y/400);
 	if (ddd < 0) {
