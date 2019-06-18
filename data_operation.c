@@ -19,27 +19,27 @@ int* check_autonomy(struct car* car_info, int* autonomy)
 	return autonomy;
 }
 
-struct car* get_trips_period(struct car* car_info, struct car* this_trip, char* reference_start, char* reference_finished)
+struct car* get_period(struct car* c_in,struct car* this_trip,char* st,char* fin)
 {
-	struct car* current = car_info;
+	struct car* c = c_in;
         struct car* temp = this_trip;
         
-        while (current != NULL){
-        	if (data_range(current -> started_at, current -> finished_at, reference_start, reference_finished)) {
+        while (c != NULL){
+        	if (data_range(c->started_at, c->finished_at, st, fin)) {
         	 
-                        char* headers[4] = {current->dongle, current->customer, current->started_at, current->finished_at};
+                        char* headers[4] = {c->dongle, c->customer, c->started_at, c->finished_at};
         	        float headers_float[5];
-        	        headers_float[0] = current->minute;
- 			headers_float[1] = current->consumption;
- 			headers_float[2] = current->mileage;
- 			headers_float[3] = current->cost;
- 			headers_float[4] = current->kml;
+        	        headers_float[0] = c->minute;
+ 			headers_float[1] = c->consumption;
+ 			headers_float[2] = c->mileage;
+ 			headers_float[3] = c->cost;
+ 			headers_float[4] = c->kml;
         	        
         	        this_trip = insert_bottom(headers_float, headers, this_trip);
         	        
         		
 			}
-		current = current ->next_car;
+		c = c->next_car;
         }
         print_list(this_trip);
         return this_trip;
@@ -103,27 +103,42 @@ int leap_year(int year)
         return 365;
 }
 
-int data_range(char* trip_date_start, char* trip_date_finished, char* request_start_date, char* request_finished_date)
+int data_range(char* date_st, char* date_fin, char* req_st, char* req_fin)
 {
-        if(date_to_days(request_start_date) <= date_to_days(trip_date_start) && 
-           date_to_days(trip_date_finished) < date_to_days(request_finished_date) &&
-           date_to_days(request_finished_date) > date_to_days(trip_date_start)){
-                return 1;
-        	 }
+        if(date_to_days(req_st) <= date_to_days(date_st)) {
+                if(date_to_days(date_fin) < date_to_days(req_fin)) {
+                        if(date_to_days(req_fin) > date_to_days(date_st)){
+                                return 1;
+        
+                        }
+                }
+        }
         return 0;
 }
-
-struct car* choose_data_range (struct car* car_info, struct car* temp,char* date)
+ 
+struct car* choose_data_range(struct car* car_info,struct car* temp,char* date)
 {
         char* start_date; 
         char* finish_date;     
         int last_sunday;
 	finish_date = today_date(finish_date);
         last_sunday= date_to_days(finish_date)-7+2990; 
-        if (get_weekday(finish_date) == 1){
+        if (get_weekday(finish_date) == sunday){
+
         	start_date = days_to_date(last_sunday, start_date);
+        } else {
+            	free(finish_date);
+                printf("Escolha o periodo das viagens\n");
+                printf("Digite a data de inicio: (ex. 15/12/2018) \n");
+                
+                start_date = malloc(11*sizeof(char));
+                scanf("%s", start_date);
+                
+                printf("Digite a data de termino da viagem: (ex. 15/12/2018) \n");                
+                finish_date = malloc(11*sizeof(char));
+                scanf("%s", finish_date);
         }
-        temp = get_trips_period(car_info,temp, start_date, finish_date);
+        temp = get_period(car_info,temp, start_date, finish_date);
     	free(start_date);
         free(finish_date);
         
