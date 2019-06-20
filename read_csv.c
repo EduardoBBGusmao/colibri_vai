@@ -12,8 +12,9 @@ int main()
 	
 	car_info = read_line(car_info);
         temp = choose_data_range(car_info,temp,date);
+        
 	print_perfomance(temp);
+	
 	free_list(car_info);
         free_list(temp);     
 }
-
