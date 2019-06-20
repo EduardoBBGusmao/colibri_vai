@@ -2,7 +2,7 @@ int date_to_days(char* date);
 struct car* get_period(struct car* c_in,struct car* this_trip,char* st,char* fin);
 int* check_autonomy(struct car* car_info,int autonomy[5]);
 int leap_year(int year);
-int mounth_days(int mounth, int year);
+int month_days(int month, int year);
 int data_range(char* date_st, char* date_fin, char* req_st, char* req_fin);
 void print_perfomance(struct car* car_info);
 struct car* choose_data_range(struct car* car_info,struct car* temp,char* date);
